@@ -154,6 +154,9 @@ padding: 10px 15px;
     #header-link {
         display: none;
     }
+    #header-icon {
+        display: inline-block;
+    }
     .section, .section-view {
         padding: 5px;
     }
