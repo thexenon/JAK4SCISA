@@ -1,14 +1,14 @@
 <div id="posts"></div>
 
 <script>
-    var dbBlogs = firebase.database().ref().child("Blogs").orderByChild("counter");
+    var dbBlogs = firebase.database().ref().child("Posts").orderByChild("key");
     dbBlogs.on("value", function(blogs){
         if (blogs.exists()){
             var blogsHtml = "";
             blogs.forEach(function(singleBlog){
                 
-                blogsHtml += "<div style='text-align: center; background: grey; margin: 35px; padding: 15px; border-radius: 40px;'>";
-                    blogsHtml += "<div><img style= 'width:70%; height: 400px; padding-top: 30px; border-radius: 10%; border-top-left-radius: 40px;' src= '";
+                blogsHtml += "<div class='home-post'>";
+                    blogsHtml += "<div><img src= '";
                         blogsHtml += singleBlog.val().image;
                     blogsHtml += "'></div><br>";
 

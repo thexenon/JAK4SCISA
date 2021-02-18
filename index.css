@@ -43,10 +43,9 @@
 /* Header */
 .header {
     text-align: center;
-    height: 73ch;
+    height: 75ch;
     position: sticky;
     top: 0px;
-    bottom: 0px;
     background: gray;
     border-right: 5px solid grey;
 }
@@ -54,6 +53,17 @@
     margin: 1px 0 20px;
     padding-top: 30px;
 
+}
+#header-icon {
+    display: none;
+}
+.header-img img {
+    height: 140px;
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
 }
 .header-list ul{
     list-style: none;
@@ -97,13 +107,55 @@ padding: 50px 35px;
 font-size: 50px;
 padding: 10px 15px;
 }
+.header-list .fa {
+    color: brown;
+    padding-right: 10px;
+}
 /* Font Icons */
+/* Home */
+ .home-post {
+    text-align: center;
+    background: grey;
+    margin: 35px;
+    padding: 15px;
+    border-radius: 40px;
+ }
+ .home-post img {
+    width:70%;
+    height: 400px;
+    padding-top: 30px;
+    border-radius: 10%;
+    border-top-left-radius: 40px;
+ }
+/* Home */
 /* Media */
 @media (max-width:760px){
-
+    
+    .body {
+        display: grid;
+        grid-template-columns: 1fr 4.5fr;
+        grid-template-rows: auto;
+        background: gainsboro;
+        overflow-x: hidden;
+    }
     .header {  
         position: sticky;
         left: 0px;
+    }
+    .header-img img {
+        border-radius: 20px;
+        height: 80px;
+        padding: 10px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+    }
+    #header-link {
+        display: none;
+    }
+    .section, .section-view {
+        padding: 5px;
     }
     .fonts {
         display: block;
@@ -115,6 +167,15 @@ padding: 10px 15px;
     }
     .font-icons h1 {
         padding: 10px;
+    }
+    .home-post {
+        padding: 2px;
+        padding: 3px;
+    }
+    .home-post img {
+        width: 210px;
+        height: 200px;
+        padding: 5px;
     }
 }
 /* Media */
