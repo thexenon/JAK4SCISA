@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask</title>
+    <link rel="stylesheet" href="index.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-storage.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+
+</head>
+
+<body>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAVTf_L-G0kKf00pxxFiM_tpPszvhMeADk",
+            authDomain: "my-everyday-life.firebaseapp.com",
+            databaseURL: "https://my-everyday-life.firebaseio.com",
+            projectId: "my-everyday-life",
+            storageBucket: "my-everyday-life.appspot.com",
+            messagingSenderId: "514831887508",
+            appId: "1:514831887508:web:d2bb97db33104f17f19881",
+            measurementId: "G-26XYSYXF2R"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.auth.Auth.Persistence.LOCAL;
+    </script>
+
+    <div>
+        <div class="content">
+            <div class="form-box">
+                <form id="bd-wish" class="input-group">
+                    <textarea id="bd-msg" cols="30" rows="5" placeholder="Write an anonymous message..."></textarea>
+                    <div>
+                        <button id="save-msg" type="button">Send your message <i class="fas fa-envelope"></i></button>
+                    </div>
+                </form>
+                <div id="result"></div>
+            </div>
+        </div>
+    </div><br><br><br><br>
+    <hr><br><br><br>
+
+
+
+    <script>
+        $("#save-msg").click(function() {
+            var msg = $("#bd-msg").val()
+            var dateStr = new Date().getTime();
+            var databaseRef = firebase.database().ref().child("Ask JAK");
+            var blogData = {
+                "anon": msg,
+                "count": 100000000000000000000000000000 - dateStr,
+            };
+
+            var newPostRef = databaseRef.push();
+            if (msg != "") {
+                newPostRef.set(blogData, function(err) {
+                    if (!err) {
+                        $("#result").attr("class", "alert alert-success");
+                        $("#result").html("Message has been uploaded successfully...!");
+                        $("#bd-wish")[0].reset();
+
+                    } else {
+                        $("#result").attr("class", "alert alert-danger");
+                        $("#result").html("An error occuried in the upload of your post...!");
+                    }
+                });
+            } else {
+                $("#result").html("Please write a message...!");
+            }
+        });
+
+
+
+
+        var dbBlogs = firebase.database().ref().child("Anonymous Questions").orderByChild("count");
+        dbBlogs.on("value", function(blogs) {
+            if (blogs.exists()) {
+                var blogsHtml = "";
+                blogs.forEach(function(singleBlog) {
+                    count = count - 1;
+                    blogsHtml += "<div>"
+                    blogsHtml += "<p style='border: 2px solid black; border-radius: 30px; width: 90%; background: linear-gradient(to right, blue, pink);padding: 20px; font-size: 1.2em; min-height: 100px; position: relative; margin: 2% auto; color='black''>"
+                    blogsHtml += singleBlog.val().anon
+                    blogsHtml += "<br><br> &copy; TAB 3 - KYCM &trade;"
+                    blogsHtml += "</p>"
+                    blogsHtml += "</div>"
+
+                });
+
+
+            }
+        });
+    </script>
+
+</body>
+
+</html>
