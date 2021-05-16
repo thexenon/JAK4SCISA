@@ -153,6 +153,7 @@
 
                         uploadTask.snapshot.ref.getDownloadURL().then(function(downloadUrl) {
                             var time = new Date();
+                            var dateStr = new Date().getTime();
                             var option = {
                                 weekday: "long",
                                 month: "long",
@@ -171,6 +172,7 @@
                                     hours12: true
                                 }),
                                 "date": time.toLocaleDateString('en-US', option),
+                                "count": 100000000000000000000000000000 - dateStr,
                             };
 
                             var newPostRef = databaseRef.push();
